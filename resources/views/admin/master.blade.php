@@ -47,10 +47,10 @@
       <div class="main-sidebar sidebar-style-2">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            <a href="{{ route('category.index') }}">Stisla</a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
+            <a href="{{ route('category.index') }}">St</a>
           </div>
           <!-- {% include "layouts/menu.html" %} -->
            @include('admin.components.menu')

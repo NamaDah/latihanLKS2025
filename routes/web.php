@@ -13,10 +13,11 @@ Route::resource('category', CategoryController::class);
 // Route::get('/category/edit/{id}', [CategoryController::class, 'edit']);
 // Route::put('/category/edit/{id}', [CategoryController::class, 'update']);
 Route::get('category/delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
-
-
+Route::post('category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
+Route::get('/images/{filename}', [ProductController::class, 'show'])->name('image.show');
 
 
 
 
 Route::resource('product', ProductController::class);
+Route::get('product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
