@@ -34,7 +34,7 @@
                             <form action="{{ route('product.update', $product->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
-                                @method('POST')
+                                @method('PUT')
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered">
                                         <tr>
@@ -57,7 +57,6 @@
                                         <tr>
                                             <td>Image</td>
                                             <td>
-
                                                 <div class="custom-file">
                                                     <input type="file" class="custom-file-input" id="customFile"
                                                         name="image">

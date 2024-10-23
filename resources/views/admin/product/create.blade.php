@@ -53,11 +53,15 @@
                                             </td>
                                         </tr>
                                         <tr>
-
                                             <td>Image</td>
                                             <td>
-                                            <input type="file" name="image" class="form-control">
+                                                <div class="custom-file">
+                                                    <input type="file" class="custom-file-input" id="customFile"
+                                                        name="image">
+                                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                                </div>
                                             </td>
+
                                         </tr>
                                         <tr>
                                             <td>Category</td>

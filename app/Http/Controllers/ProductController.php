@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
+
 
 class ProductController extends Controller
 {
@@ -87,14 +89,30 @@ class ProductController extends Controller
         //
         // Validate the request
         $request->validate([
-            'name' => 'required'
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'image' => 'required',
         ]);
 
         // Find the category by ID
         $product = Product::findOrFail($id);
 
+        if ($product->image) {
+            // Hapus gambar dari storage
+            Storage::delete('public/' . $product->image);
+        }
+
+        $fileName = $request->file('image')->hashName();
+        $file = $request->file('image')->storeAs('public', $fileName);
+
+
         // Update the category's name
         $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->image = $fileName;
+        $product->category_id = $request->category_id;
         $product->save();
 
         // Redirect to the category index with a success message
@@ -106,11 +124,19 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Temukan produk berdasarkan ID
         $product = Product::findOrFail($id);
 
+        // Cek apakah produk memiliki gambar yang tersimpan
+        if ($product->image) {
+            // Hapus gambar dari storage
+            Storage::delete('public/' . $product->image);
+        }
+
+        // Hapus produk dari database
         $product->delete();
 
+        // Redirect dengan pesan sukses
         return redirect()->route('product.index')->with('success', 'Product deleted successfully');
     }
 }
